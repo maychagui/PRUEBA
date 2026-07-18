@@ -1,46 +1,697 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Calculadora de Créditos Colombia (V2.0)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
-        body {
-            background-color: #0f172a;
-            color: #f1f5f9;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: #1e293b;
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 1px solid #334155;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 35px;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 25px;
-        }
-        h1 { color: #38bdf8; font-size: 28px; margin-bottom: 8px; }
-        p.subtitle { color: #94a3b8; font-size: 14px; }
-        .badge {
-            background: #0284c7;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            vertical-align: middle;
-            margin-left: 8px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mash · Bolsos · Barranquilla</title>
+  <!-- Google Fonts: sofisticación + legibilidad -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+  <!-- Font Awesome 6 (gratis) para iconos elegantes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* RESET + variables */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #faf6f0;
+      font-family: "Inter", sans-serif;
+      color: #2e241f;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* tipografía sofisticada */
+    h1, h2, h3, .logo, .hero-title {
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .btn {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid #2e241f;
+      padding: 0.9rem 2.4rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #2e241f;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      border-radius: 0px; /* línea nítida */
+    }
+
+    .btn-primary {
+      background: #2e241f;
+      color: #faf6f0;
+      border: 1px solid #2e241f;
+    }
+
+    .btn-primary:hover {
+      background: #4f3b33;
+      border-color: #4f3b33;
+      color: #faf6f0;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #2e241f;
+    }
+
+    .btn-outline:hover {
+      background: #2e241f;
+      color: #faf6f0;
+    }
+
+    /* ===== HEADER ===== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid rgba(46, 36, 31, 0.08);
+    }
+
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: #2e241f;
+      text-decoration: none;
+    }
+
+    .logo span {
+      font-weight: 300;
+      color: #8c7a6e;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.8rem;
+      list-style: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #2e241f;
+      transition: color 0.2s;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 0.2rem;
+    }
+
+    .nav-links a:hover {
+      color: #a6867a;
+      border-bottom-color: #a6867a;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 1.2rem;
+      color: #2e241f;
+    }
+
+    .nav-icons i {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .nav-icons i:hover {
+      color: #a6867a;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 3.5rem 0 5rem 0;
+    }
+
+    .hero-content h1 {
+      font-size: 4.2rem;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
+    .hero-content h1 i {
+      font-style: italic;
+      color: #a6867a;
+      font-weight: 300;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #4f3b33;
+      max-width: 90%;
+      margin-bottom: 2.5rem;
+      font-weight: 350;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #e8dfd7;
+      padding: 0.3rem 1.2rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #2e241f;
+      margin-bottom: 1.4rem;
+      border-radius: 20px;
+    }
+
+    .hero-image {
+      background: #e8dfd7;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.08);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-image .placeholder-icon {
+      font-size: 5rem;
+      color: #8c7a6e;
+      opacity: 0.5;
+    }
+
+    /* ===== FEATURES / DESTACADOS ===== */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 2rem 0 3rem 0;
+      border-top: 1px solid rgba(46, 36, 31, 0.05);
+      margin-top: 1rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .feature-item i {
+      font-size: 1.8rem;
+      color: #8c7a6e;
+      width: 2.5rem;
+    }
+
+    .feature-item h4 {
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #2e241f;
+    }
+
+    .feature-item p {
+      font-size: 0.85rem;
+      color: #6b5a51;
+    }
+
+    /* ===== PRODUCTOS DESTACADOS ===== */
+    .section-title {
+      font-size: 2.4rem;
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      margin: 3rem 0 1.8rem 0;
+      letter-spacing: -0.01em;
+      color: #2e241f;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e8dfd7;
+      padding-bottom: 0.8rem;
+    }
+
+    .section-title span {
+      font-size: 0.9rem;
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: #8c7a6e;
+      cursor: default;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .product-card {
+      background: #ffffff;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      padding-bottom: 1.5rem;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -12px rgba(46, 36, 31, 0.08);
+    }
+
+    .product-image {
+      background: #f2ede7;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    .product-image i {
+      font-size: 4.8rem;
+      color: #8c7a6e;
+      opacity: 0.6;
+    }
+
+    .product-card h3 {
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0 1.2rem;
+      color: #2e241f;
+    }
+
+    .product-card .price {
+      font-family: "Playfair Display", serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #4f3b33;
+      padding: 0.2rem 1.2rem;
+    }
+
+    .product-card .add-cart {
+      display: inline-block;
+      margin: 0.5rem 1.2rem 0;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #8c7a6e;
+      border-bottom: 1px solid #d8ccc2;
+      padding-bottom: 0.15rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+
+    .product-card .add-cart:hover {
+      color: #2e241f;
+      border-bottom-color: #2e241f;
+    }
+
+    /* ===== BARRIO / LOCATION ===== */
+    .location-section {
+      background: #f2ede7;
+      padding: 3.5rem 0;
+      margin: 2.5rem 0 3rem 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .location-content h2 {
+      font-size: 2.6rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+    }
+
+    .location-content p {
+      font-size: 1rem;
+      color: #4f3b33;
+      max-width: 85%;
+      margin-bottom: 1.8rem;
+    }
+
+    .location-content i {
+      color: #8c7a6e;
+      margin-right: 0.4rem;
+    }
+
+    .location-image {
+      background: #ddd2c6;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #2e241f;
+      letter-spacing: 0.05em;
+      font-weight: 300;
+    }
+
+    .location-image i {
+      font-size: 2.8rem;
+      margin-right: 1rem;
+      color: #4f3b33;
+      opacity: 0.7;
+    }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter {
+      background: #2e241f;
+      color: #faf6f0;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .newsletter h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .newsletter p {
+      font-weight: 300;
+      opacity: 0.8;
+      margin-bottom: 1.8rem;
+      max-width: 480px;
+    }
+
+    .newsletter form {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .newsletter input {
+      background: transparent;
+      border: 1px solid #7d6b61;
+      padding: 0.8rem 1.5rem;
+      font-family: "Inter", sans-serif;
+      font-size: 0.9rem;
+      color: #faf6f0;
+      min-width: 260px;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .newsletter input::placeholder {
+      color: #b3a39a;
+      font-weight: 300;
+    }
+
+    .newsletter input:focus {
+      border-color: #faf6f0;
+    }
+
+    .newsletter .btn {
+      border-color: #faf6f0;
+      color: #faf6f0;
+      padding: 0.8rem 2.2rem;
+    }
+
+    .newsletter .btn:hover {
+      background: #faf6f0;
+      color: #2e241f;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.2rem 0;
+      border-top: 1px solid rgba(46, 36, 31, 0.06);
+      font-size: 0.85rem;
+      color: #6b5a51;
+      flex-wrap: wrap;
+    }
+
+    .footer .social i {
+      margin-left: 1.8rem;
+      font-size: 1.2rem;
+      color: #2e241f;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .footer .social i:hover {
+      color: #a6867a;
+    }
+
+    .footer .logo-small {
+      font-family: "Playfair Display", serif;
+      font-size: 1.5rem;
+      color: #2e241f;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 2rem 0;
+      }
+      .hero-content p {
+        max-width: 100%;
+      }
+      .hero-image {
+        height: 340px;
+      }
+      .location-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .location-content p {
+        max-width: 100%;
+      }
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .features {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .navbar {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+      .features {
+        grid-template-columns: 1fr;
+      }
+      .newsletter input {
+        min-width: 100%;
+      }
+      .footer {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    /* detalles estéticos */
+    .tag-barranquilla {
+      font-style: italic;
+      font-weight: 300;
+      color: #a6867a;
+    }
+
+    .underline-mash {
+      display: inline-block;
+      border-bottom: 2px solid #a6867a;
+      padding-bottom: 4px;
+    }
+
+    /* imagen placeholder (no se usa img real por simplicidad) */
+    .mock-bag-icon {
+      font-size: 5rem;
+      color: #8c7a6e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <a href="#" class="logo">mash <span>·</span> barranquilla</a>
+      <ul class="nav-links">
+        <li><a href="#">Bolsos</a></li>
+        <li><a href="#">Nueva Colección</a></li>
+        <li><a href="#">Sobre Mash</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+      <div class="nav-icons">
+        <i class="fas fa-search"></i>
+        <i class="fas fa-user"></i>
+        <i class="fas fa-shopping-bag"></i>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge"><i class="fas fa-map-pin"></i> Barranquilla · Caribe</div>
+        <h1>Elegancia <br>que <i>se lleva</i> <br>en cada bolso</h1>
+        <p>Diseños exclusivos para la mujer moderna. Con la calidez y el ritmo de la Arenosa. <span class="tag-barranquilla">#MashBarranquilla</span></p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#" class="btn btn-primary">Ver colección</a>
+          <a href="#" class="btn btn-outline"><i class="fas fa-play" style="margin-right: 0.5rem;"></i> Descubrir</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <!-- imagen conceptual: bolso de lujo -->
+        <div style="display: flex; flex-direction: column; align-items: center; opacity: 0.7;">
+          <i class="fas fa-bag-shopping" style="font-size: 6rem; color: #4f3b33;"></i>
+          <span style="font-family: 'Playfair Display', serif; margin-top: 0.5rem; letter-spacing: 0.1rem; color: #4f3b33;">Mash · 2026</span>
+        </div>
+        <!-- podríamos colocar una imagen real, pero mantenemos el concepto limpio -->
+      </div>
+    </section>
+
+    <!-- FEATURES / VALORES -->
+    <div class="features">
+      <div class="feature-item">
+        <i class="fas fa-hand-holding-heart"></i>
+        <div>
+          <h4>Hecho a mano</h4>
+          <p>Artesanía local, calidad única.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-leaf"></i>
+        <div>
+          <h4>Materiales sostenibles</h4>
+          <p>Pieles vegetales y algodón orgánico.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-shipping-fast"></i>
+        <div>
+          <h4>Envío en Barranquilla</h4>
+          <p>Entrega rápida en toda la ciudad.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTOS DESTACADOS -->
+    <div class="section-title">
+      <span>Bolsos <span class="underline-mash">Mash</span></span>
+      <span>Novedades <i class="fas fa-arrow-right" style="margin-left: 0.6rem;"></i></span>
+    </div>
+
+    <div class="product-grid">
+      <!-- producto 1 -->
+      <div class="product-card">
+        <div class="product-image">
+          <i class="fas fa-bag-shopping"></i>
+        </div>
+        <h3>Bolso Arenosa</h3>
+        <div class="price">$ 1.280.000</div>
+        <a href="#" class="add-cart"><i class="fas fa-plus" style="margin-right: 0.4rem;"></i> Añadir al carrito</a>
+      </div>
+      <!-- producto 2 -->
+      <div class="product-card">
+        <div class="product-image">
+          <i class="fas fa-suitcase"></i>
+        </div>
+        <h3>Caribbean Tote</h3>
+        <div class="price">$ 1.950.000</div>
+        <a href="#" class="add-cart"><i class="fas fa-plus" style="margin-right: 0.4rem;"></i> Añadir al carrito</a>
+      </div>
+      <!-- producto 3 -->
+      <div class="product-card">
+        <div class="product-image">
+          <i class="fas fa-handbag"></i>
+        </div>
+        <h3>Mini Mash Clutch</h3>
+        <div class="price">$ 850.000</div>
+        <a href="#" class="add-cart"><i class="fas fa-plus" style="margin-right: 0.4rem;"></i> Añadir al carrito</a>
+      </div>
+    </div>
+
+    <!-- UBICACIÓN / BARRIO + SOBRE MASH -->
+    <div class="location-section">
+      <div class="location-content">
+        <h2>Hecho en <br>Barranquilla</h2>
+        <p><i class="fas fa-location-dot"></i> Taller en el barrio El Prado · Calle 72 # 45-12. Cada bolso cuenta la historia de nuestra tierra.</p>
+        <a href="#" class="btn btn-outline" style="border-color: #2e241f;">Conoce nuestro taller</a>
+      </div>
+      <div class="location-image">
+        <i class="fas fa-map-pin"></i> Barranquilla · Colombia
+      </div>
+    </div>
+
+    <!-- NEWSLETTER / SUSCRIPCIÓN -->
+    <div class="newsletter">
+      <h3>Suscríbete a <span style="font-weight: 600;">Mash</span></h3>
+      <p>Sé la primera en conocer nuestras colecciones y eventos exclusivos en Barranquilla.</p>
+      <form>
+        <input type="email" placeholder="tu correo electrónico" />
+        <button type="submit" class="btn">Suscribirme</button>
+      </form>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="logo-small">mash</div>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <span>© 2026 · Barranquilla</span>
+        <span style="opacity: 0.4;">|</span>
+        <span><i class="fas fa-phone-alt" style="margin-right: 0.3rem;"></i> +57 300 123 4567</span>
+      </div>
+      <div class="social">
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-facebook-f"></i>
+        <i class="fab fa-tiktok"></i>
+        <i class="fab fa-whatsapp"></i>
+      </div>
+    </footer>
+  </div>
+  <!-- pequeño detalle extra: fondo suave -->
+  <div style="height: 1px; background: linear-gradient(to right, transparent, #e8dfd7, transparent); margin-top: 0.5rem;"></div>
+</body>
+</html>
